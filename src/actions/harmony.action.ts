@@ -5,11 +5,11 @@ import Note from '../logic/Note';
 class Harmony extends Action{
 
 	onPress(): void {
-		this.playNote();
-        Harmony.playHarmonyTone()
+		this.generateNote();
+        this.playHarmonyTone()
 	}
     
-    private static playHarmonyTone() {
+    public playHarmonyTone() {
 
 		let harmonyTone: any;
 		let choices: Array<any> = [];

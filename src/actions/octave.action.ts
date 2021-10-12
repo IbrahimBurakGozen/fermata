@@ -4,12 +4,12 @@ import note from "../logic/Note";
 class Octave extends Action{
 
     onPress(): void {
-        this.playNote();
+        this.generateNote();
         this.playOctave();
     }
 
      public playOctave(){
-        let octaveTone:String = "";
+        let octaveTone:string = "";
         let octaveDownorUp: Array<number> = [-12, 12]
 
         for (let i = 0; i < note.DATABASE.length; i++) {

@@ -11,7 +11,7 @@ class Note{
 	/** The last Note played, regardless of whether in Play/Replay Mode **/
 	public lastAbsolute: string;
 	/** The last Octave Note played. */
-	public lastOctave: String;
+	public lastOctave: string;
 	/** The last Harmony Note played. */
 	public lastHarmony: string;
 	

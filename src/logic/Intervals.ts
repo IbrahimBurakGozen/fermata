@@ -3,10 +3,10 @@ import mode from "./Mode";
 
 class Intervals {
     
-    public DATABASE: Array<String> = ["one1", "two1", "thr1", "for1", "fiv1", "six1", "sev1", "one2", "two2", "thr2", "for2", "fiv2", "six2", "sev2", "one3", "two3", "thr3", "for3", "fiv3", "six3", "sev3", "one4"];
+    public DATABASE: Array<string> = ["one1", "two1", "thr1", "for1", "fiv1", "six1", "sev1", "one2", "two2", "thr2", "for2", "fiv2", "six2", "sev2", "one3", "two3", "thr3", "for3", "fiv3", "six3", "sev3", "one4"];
 
     public updated: Boolean = false;
-    public loadout: Map<String, String>;
+    public loadout: Map<string, string>;
 
     public populate() {
         console.log("populating");
