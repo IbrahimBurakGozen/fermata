@@ -16,11 +16,12 @@ class Key{
 
         let newIndex: number = randomNumber(this.DATABASE.length-1)
 		
-		while (newIndex == this.index)
+		while (newIndex == this.index){
 			newIndex = randomNumber(this.DATABASE.length-1);
+		}
 		
 		this.index = newIndex;
-		this.current = this.DATABASE[this.index];
+		this.current = this.DATABASE[this.index][0];
 		intervals.updated = false;
 		intervals.populate();
 

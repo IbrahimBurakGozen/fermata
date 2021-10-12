@@ -25,8 +25,8 @@ abstract class Action {
 		console.log("This is the note that is going to be played => ", noteName);
 		
 		
-		let note = new Sound(`/home/ubuntu/fermata/src/actions/sounds/${noteName}.wav`)
-		await note.play();
+		//let note = new Sound(`/home/ubuntu/fermata/src/actions/sounds/${noteName}.wav`)
+		//await note.play();
 
 		note.lastRecorded = noteName;
 		note.lastAbsolute = note.lastRecorded;
@@ -34,16 +34,16 @@ abstract class Action {
 	
 	protected playChord(){
 		let chordTones: any = mode.current.chords[Math.floor(Math.random() * mode.current.chords.length)];
-		console.log(`These are the chord tones: ${chordTones}`)	
+		console.log(`These are the chord tones: ${intervals.loadout.get(chordTones)}`)	
 
 		console.log(intervals.loadout.get(chordTones[0]));
-		new Sound(`/home/ubuntu/fermata/src/actions/sounds/${intervals.loadout.get(chordTones[0])}.wav`).play();	
-		new Sound(`/home/ubuntu/fermata/src/actions/sounds/${intervals.loadout.get(chordTones[1])}.wav`).play();
-		new Sound(`/home/ubuntu/fermata/src/actions/sounds/${intervals.loadout.get(chordTones[2])}.wav`).play();	
+		//new Sound(`/home/ubuntu/fermata/src/actions/sounds/${intervals.loadout.get(chordTones[0])}.wav`).play();	
+		//new Sound(`/home/ubuntu/fermata/src/actions/sounds/${intervals.loadout.get(chordTones[1])}.wav`).play();
+		//new Sound(`/home/ubuntu/fermata/src/actions/sounds/${intervals.loadout.get(chordTones[2])}.wav`).play();	
 
 
 		if (chordTones.length > 3 && intervals.loadout.get(chordTones[3]) != null) {
-			new Sound(`/home/ubuntu/fermata/src/actions/sounds/${intervals.loadout.get(chordTones[3])}.wav`).play();
+			//new Sound(`/home/ubuntu/fermata/src/actions/sounds/${intervals.loadout.get(chordTones[3])}.wav`).play();
 		}
 	}
 

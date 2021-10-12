@@ -37,7 +37,7 @@ class Intervals {
             // }
 
             this.updated = true;
-            console.log(this.loadout);
+            //console.log(this.loadout);
         }
         else return this.loadout;
     }
