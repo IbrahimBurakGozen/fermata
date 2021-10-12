@@ -2,6 +2,7 @@ import key from '../logic/Key';
 import note from '../logic/Note';
 import mode  from '../logic/Mode';
 import intervals from '../logic/Intervals';
+const Sound = require('node-aplay');
 
 abstract class Action {
 
@@ -22,10 +23,16 @@ abstract class Action {
 	// MUSIC FUNCTIONS //////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    protected play(options: Array<string>){
+    protected async play(options: Array<string>){
 		let noteName = this.noteAdjustments(options);
 		console.log("This is the note that is going to be played => ", noteName);
 		
+		
+		let note = new Sound(`/home/ubuntu/fermata/src/actions/sounds/${noteName}.wav`)
+		console.log(note);
+		await note.play();
+
+
 		//console.log("THIS NOT IS PLAYING => ") //? noteName : )
 		//Button.MIDIplay(noteName);
 		//playJZZMIDI(noteName)
@@ -35,7 +42,13 @@ abstract class Action {
 	
 	protected playChord(){
 		let chordTones: any = mode.current.chords[Math.floor(Math.random() * mode.current.chords.length)];
-		console.log(`These are the chord tones: ${chordTones}`)		
+		console.log(`These are the chord tones: ${chordTones}`)	
+
+		console.log(intervals.loadout.get(chordTones[0]));
+		new Sound(`/home/ubuntu/fermata/src/actions/sounds/${intervals.loadout.get(chordTones[0])}.wav`).play();	
+		new Sound(`/home/ubuntu/fermata/src/actions/sounds/${intervals.loadout.get(chordTones[1])}.wav`).play();
+		new Sound(`/home/ubuntu/fermata/src/actions/sounds/${intervals.loadout.get(chordTones[2])}.wav`).play();	
+
 
 		//playJZZMIDI(Intervals.loadout.get(chordTones[0]));
 		//playJZZMIDI(Intervals.loadout.get(chordTones[1]));
