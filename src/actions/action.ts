@@ -6,7 +6,6 @@ const Sound = require('node-aplay');
 
 abstract class Action {
 
-	
 	public playsNote: boolean = false;
 	public noteName: string = 'n/a';
 
@@ -20,30 +19,33 @@ abstract class Action {
 	// MUSIC FUNCTIONS //////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	/** Play a note! Takes in an array of classes, and will pick one randomly. */
     protected async play(options: Array<string>){
 		let noteName = this.noteAdjustments(options);
 		console.log("This is the note that is going to be played => ", noteName);
 		
 		
-		//let note = new Sound(`/home/ubuntu/fermata/src/actions/sounds/${noteName}.wav`)
-		//await note.play();
-
+		let note = new Sound(`/home/ubuntu/fermata/src/actions/sounds/${noteName}.wav`)
+		await note.play();
+		note.secondToLastRecorded = note.lastRecorded;
 		note.lastRecorded = noteName;
 		note.lastAbsolute = note.lastRecorded;
 	}
 	
 	protected playChord(){
+
+		// DETERMINE CHORD TONES
 		let chordTones: any = mode.current.chords[Math.floor(Math.random() * mode.current.chords.length)];
 		console.log(`These are the chord tones: ${intervals.loadout.get(chordTones)}`)	
 
 		console.log(intervals.loadout.get(chordTones[0]));
-		//new Sound(`/home/ubuntu/fermata/src/actions/sounds/${intervals.loadout.get(chordTones[0])}.wav`).play();	
-		//new Sound(`/home/ubuntu/fermata/src/actions/sounds/${intervals.loadout.get(chordTones[1])}.wav`).play();
-		//new Sound(`/home/ubuntu/fermata/src/actions/sounds/${intervals.loadout.get(chordTones[2])}.wav`).play();	
+		new Sound(`/home/ubuntu/fermata/src/actions/sounds/${intervals.loadout.get(chordTones[0])}.wav`).play();	
+		new Sound(`/home/ubuntu/fermata/src/actions/sounds/${intervals.loadout.get(chordTones[1])}.wav`).play();
+		new Sound(`/home/ubuntu/fermata/src/actions/sounds/${intervals.loadout.get(chordTones[2])}.wav`).play();	
 
 
 		if (chordTones.length > 3 && intervals.loadout.get(chordTones[3]) != null) {
-			//new Sound(`/home/ubuntu/fermata/src/actions/sounds/${intervals.loadout.get(chordTones[3])}.wav`).play();
+			new Sound(`/home/ubuntu/fermata/src/actions/sounds/${intervals.loadout.get(chordTones[3])}.wav`).play();
 		}
 	}
 
@@ -51,15 +53,16 @@ abstract class Action {
 	// MODE FUNCTIONS //////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    protected generateNote(){
+
+	/** Uses the option sets of the current mode to choose which note to generate. */
+    protected generateNote(): void{
 
         console.log('starting GenerateNote')
         let played: boolean = false;
-        //let optionSets: Array<Array<String>>;
 		
 		
 		let optionSets = mode.current.logic;
-		console.log(intervals.loadout)
+		//console.log(intervals.loadout)
 
 		intervals.DATABASE.forEach((databaseElement,index) =>{
 			if(note.lastRecorded == intervals.loadout.get(databaseElement)){
@@ -86,7 +89,7 @@ abstract class Action {
 			
 			// Halve Probability of Trills and Repeats
 			if (newNote == note.secondToLastRecorded || newNote == note.lastAbsolute){
-				console.log("halvin probability of Trills and Repeats")
+				console.log("halving probability of Trills and Repeats")
 				random = Math.random()* options.length;
 				newNote = intervals.loadout.get(options[random]);
 			}
@@ -134,26 +137,3 @@ abstract class Action {
 }
 
 export default Action;
-
-
-/* export const soundplayer = require('sound-play');
-export const JZZ = require('jzz');
-require("jzz-midi-smf")(JZZ);
-export async function playJZZMIDI(note: any) {
-    var midi = await JZZ();
-    var port = await midi.openMidiOut();
-    await port.noteOn(0, note, 127);
-    await port.wait(2000);
-    await port.noteOff(0, note);
-    await port.close();
-    console.log('played:', note);
-} */
-
-
-//export let MIDIplay = (note: any) => WebMidi.getOutputByName("toKeyscape").channels[1].playNote(note, {duration: 10000});
-
-
-
-// static sounds =     ["Small", "Octave", "Harmony", "Chord", "Transpose"];
-//     static weights =    [ 88.5  ,  3.5	 ,  3.5		,  2	 ,  0.5]; 
-//     static playsNote: boolean;
