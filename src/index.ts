@@ -198,10 +198,12 @@ async function main(){
     mode.index = 0;
     mode.init();
     note.lastRecorded = "C3"
-
+while (true) {
+    
     for await (const action of ACTIONS_NAMES_ARRAY) {
         console.log(action.toString() + " is playing")
         action.onPress()
         await delay(3000);
     }
+}
 }

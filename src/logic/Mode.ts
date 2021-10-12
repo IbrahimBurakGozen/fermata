@@ -29,12 +29,12 @@ class Mode {
 			if (newIndex == 3) newIndex = randomNumber(this.DATABASE.length-1);
 
 			// dit moet gefixt worden - infinite loop
-			while (newIndex == this.index){
-				newIndex = randomNumber(this.DATABASE.length-1);
-				this.index = newIndex;
-				console.log("in the while loop");
+			// while (newIndex == this.index){
+			// 	newIndex = randomNumber(this.DATABASE.length-1);
+			// 	this.index = newIndex;
+			// 	console.log("in the while loop");
 				
-			}
+			// }
 			this.index = newIndex;
 		} else {
 			this.index = modeIndex;
