@@ -1,5 +1,7 @@
 import Action from "./action";
 import note from "../logic/Note";
+const Sound = require('node-aplay')
+
 
 class Octave extends Action{
 
@@ -18,7 +20,7 @@ class Octave extends Action{
 				while (octaveTone == "" || octaveTone == null) octaveTone = note.DATABASE[i + octaveDownorUp[Math.floor(Math.random() * octaveDownorUp.length)]];
 			}
         }
-        //Button.MIDIplay(octaveTone);
+	new Sound(`/home/ubuntu/fermata/src/actions/sounds/${octaveTone}.wav`).play();
         note.lastOctave = octaveTone;
     }   
 

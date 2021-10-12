@@ -6,9 +6,7 @@ const Sound = require('node-aplay');
 
 abstract class Action {
 
-	//WebMidi = WebMidi.enable().catch((err: any) => console.log("Error: Button property WebMidi, \n" + err));
 	
-	//public static MIDIplay = (note: any) => WebMidi.getOutputByName("toKeyscape").channels[1].playNote(note, {duration: 10000});
 	public playsNote: boolean = false;
 	public noteName: string = 'n/a';
 
@@ -17,7 +15,6 @@ abstract class Action {
 
 	abstract onPress():void;
 	abstract toString():string;
-
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// MUSIC FUNCTIONS //////////////////////////////////////////////////////////////////////////////////////
@@ -29,13 +26,8 @@ abstract class Action {
 		
 		
 		let note = new Sound(`/home/ubuntu/fermata/src/actions/sounds/${noteName}.wav`)
-		console.log(note);
 		await note.play();
 
-
-		//console.log("THIS NOT IS PLAYING => ") //? noteName : )
-		//Button.MIDIplay(noteName);
-		//playJZZMIDI(noteName)
 		note.lastRecorded = noteName;
 		note.lastAbsolute = note.lastRecorded;
 	}
@@ -50,13 +42,9 @@ abstract class Action {
 		new Sound(`/home/ubuntu/fermata/src/actions/sounds/${intervals.loadout.get(chordTones[2])}.wav`).play();	
 
 
-		//playJZZMIDI(Intervals.loadout.get(chordTones[0]));
-		//playJZZMIDI(Intervals.loadout.get(chordTones[1]));
-		//playJZZMIDI(Intervals.loadout.get(chordTones[2]));
-		// If the chord is a seventh chord, push the 4th chord tone.
-		//if (chordTones.length > 3 && Intervals.loadout.get(chordTones[3]) != null) {
-		//playJZZMIDI(Intervals.loadout.get(chordTones[3]));
-		//}
+		if (chordTones.length > 3 && intervals.loadout.get(chordTones[3]) != null) {
+			new Sound(`/home/ubuntu/fermata/src/actions/sounds/${intervals.loadout.get(chordTones[3])}.wav`).play();
+		}
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
