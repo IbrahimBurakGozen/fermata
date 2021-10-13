@@ -1,6 +1,7 @@
 import Action from "./action";
 import Intervals from '../logic/Intervals';
 import Note from '../logic/Note';
+const Sound = require('node-aplay');
 
 class Harmony extends Action{
 
@@ -15,7 +16,7 @@ class Harmony extends Action{
 		let choices: Array<any> = [];
 		var i/* :Map<String, String> */ = Intervals.loadout;
 
-			 if (Note.lastAbsolute == i.get("one1")) choices = [i.get("thr1"), i.get("fiv1"), i.get("thr2"), i.get("fiv2")];
+		if (Note.lastAbsolute == i.get("one1")) choices = [i.get("thr1"), i.get("fiv1"), i.get("thr2"), i.get("fiv2")];
 		else if (Note.lastAbsolute == i.get("two1")) choices = [i.get("fiv1"), i.get("sev1"), i.get("fiv2")];
 		else if (Note.lastAbsolute == i.get("thr1")) choices = [i.get("fiv1"), i.get("one2")];
 		else if (Note.lastAbsolute == i.get("for1")) choices = [i.get("fiv1"), i.get("one2"), i.get("two2")];
@@ -40,8 +41,7 @@ class Harmony extends Action{
 
 		harmonyTone = Math.floor(Math.random() * choices.length);
 
-		let harmony: any;	
-		//harmony = Button.MIDIplay(harmonyTone);
+		new Sound(`/home/ubuntu/fermata/src/actions/sounds/${harmonyTone}.wav`).play();
 		
 		Note.lastHarmony = harmonyTone;
 	}

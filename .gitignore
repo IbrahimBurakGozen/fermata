@@ -104,3 +104,7 @@ dist
 .tern-port
 
 # Builds folder
+build
+
+# package-lock.json
+package-lock.json

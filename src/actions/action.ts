@@ -98,7 +98,7 @@ abstract class Action {
 			while (g < 100 && (note == null
 				|| (newNote == note.lastHarmony && Action.lastSoundtype == "Harmony")
 				|| (newNote == note.lastOctave && Action.lastSoundtype == "Octave")
-				//|| (type == "Octave" && (note == Intervals.loadout.get("for1") || note == Intervals.loadout.get("for2") || note == Intervals.loadout.get("for3")))
+				//|| (this.type == "Octave" && (note == intervals.loadout.get("for1") || note == intervals.loadout.get("for2") || note == intervals.loadout.get("for3")))
 				))
 			{
 				random = Math.random() * options.length - 1;
