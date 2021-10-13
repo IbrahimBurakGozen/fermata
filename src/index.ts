@@ -13,8 +13,8 @@ import note from './logic/Note';
 const five = require('johnny-five');
 const pixel = require('node-pixel');
 
-import NeoPixel from './lib/neopixel';
 import Button from './lib/button';
+import { EventEmitter } from 'stream';
 
 
 
@@ -44,6 +44,7 @@ let board = new five.Board();
  
 board.on("ready", () => {
 
+    process.setMaxListeners(100);
     note.lastRecorded = "C3"
     mode.init();
 
@@ -66,116 +67,88 @@ board.on("ready", () => {
         gamma: 2.8,
     });
 
-    strip.on("ready", async () => {
-
-        strip.color("#000");
-
+    strip.on("ready", () => {
+        strip.color("#F00");
         strip.show();
-
-        const CHORD_BUTTON: any = new Button({
-            button: {
-                pin: 2,
-                isPullup: true
-            },
-            neoPixel: new NeoPixel({start: 0, length: 23, strip: strip})
-        });
-
-        CHORD_BUTTON.solidColor("#0F0");
-
-        // const SMALL_1_BUTTON: any = new Button({
-        //     button: new five.Button({
-        //         pin: 2,
-        //         isPullup: true
-        //     }),
-        //     neoPixel: new NeoPixel({start: 24, length: 15, strip: strip})
-        // });
-
-        // SMALL_1_BUTTON.solidColor("cyan");
-
-        // SMALL_1_BUTTON.button.on("down", () => {
-        //     console.log("button pressed");
-        // });
-
-        // const SMALL_2_BUTTON: any = new Button({
-        //     button: new five.Button({
-        //         pin: 2,
-        //         isPullup: true
-        //     }),
-        //     neoPixel: new NeoPixel({start: 40, length: 15, strip: strip})
-        // });
-
-        // const SMALL_3_BUTTON: any = new Button({
-        //     button: new five.Button({
-        //         pin: 2,
-        //         isPullup: true
-        //     }),
-        //     neoPixel: new NeoPixel({start: 56, length: 15, strip: strip})
-        // });
-
-
-        // const TRANSPOSE_RING: any = new NeoPixel({start: 72, length: 23, strip: strip});
-        // TRANSPOSE_RING.color("#0F0");
-
-        // const HARMONY_RING: any = new NeoPixel({start: 96, length: 15, strip: strip});
-        // HARMONY_RING.color("#00F");
-
-        // const VAMP_RING: any = new NeoPixel({start: 112, length: 23, strip: strip});
-        // VAMP_RING.color("#0F0");
-
-        // const OCTAVE_RING: any = new NeoPixel({start: 136, length: 23, strip: strip});
-        // OCTAVE_RING.color("#00F");
-
-
-
-        // for(let i = 0; i <= 159; i++){
-        //     strip.pixel(i).color("#F00");
-        //     strip.show();
-        //     console.log(i);
-        //     await delay(1000);
-        //   }
-
-
-
     });
 
 
+    const CHORD_BUTTON: any = new Button({
+        button: new five.Button({
+            pin: 2,
+            isPullup: true
+        }),
+        neoPixel: {start: 0, length: 23, strip: strip},
+        func: function(){smallAction()}
+    });
 
+    CHORD_BUTTON.solidColor("cyan");
 
-    //NeoPixel Stick init
-    // pixelSticks = new pixel.Strip({
-    //     board: this,
-    //     controller: "FIRMATA",
-    //     strips: [ {pin: PIXEL_STICKS_PIN, length: 32}, ],
-    //     gamma: 2.8,
-    // });
-    
-    // Small rings init
-    // smallRings = new pixel.Strip({
-    //     board: this,
-    //     controller: "FIRMATA",
-    //     strips: [ {pin: PIXEL_RING_BIG_CHORDS_PIN, length: 16} ], // 64
-    //     gamma: 2.8
-    // });
+    const SMALL_1_BUTTON: any = new Button({
+        button: new five.Button({
+            pin: 6,
+            isPullup: true
+        }),
+        neoPixel: {start: 24, length: 15, strip: strip},
+        func: function(){smallAction()}
+    });
 
-    // // Big rings init
-    // bigRingsChords = new pixel.Strip({
-    //     board: this,
-    //     controller: "FIRMATA",
-    //     strips: [ {pin: PIXEL_RING_SMALL_PIN, length: 48}, ],
-    //     gamma: 2.8,
-    // });
-    // bigRingsHarmony = new pixel.Strip({
-    //     board: this,
-    //     controller: "FIRMATA",
-    //     strips: [ {pin: PIXEL_RING_BIG_HARMONY_PIN, length: 24}, ],
-    //     gamma: 2.8,
-    // });
-    // bigRingsTranspose = new pixel.Strip({
-    //     board: this,
-    //     controller: "FIRMATA",
-    //     strips: [ {pin: PIXEL_RING_BIG_TRANSPOSE_PIN, length: 24}, ],
-    //     gamma: 2.8,
-    // });
+    SMALL_1_BUTTON.solidColor("cyan");
+
+    const SMALL_2_BUTTON: any = new Button({
+        button: new five.Button({
+            pin: 6,
+            isPullup: true
+        }),
+        neoPixel: {start: 40, length: 15, strip: strip},
+        func: function(){smallAction()}
+    });
+
+    const SMALL_3_BUTTON: any = new Button({
+        button: new five.Button({
+            pin: 6,
+            isPullup: true
+        }),
+        neoPixel: {start: 56, length: 15, strip: strip},
+        func: function(){smallAction()}
+    });
+
+    const TRANSPOSE_BUTTON: any = new Button({
+        button: new five.Button({
+            pin: 6,
+            isPullup: true
+        }),
+        neoPixel: {start: 72, length: 23, strip: strip},
+        func: function(){smallAction()}
+    });
+
+    const HARMONY_BUTTON: any = new Button({
+        button: new five.Button({
+            pin: 6,
+            isPullup: true
+        }),
+        neoPixel: {start: 96, length: 15, strip: strip},
+        func: function(){smallAction()}
+    });
+
+    const VAMP_BUTTON: any = new Button({
+        button: new five.Button({
+            pin: 2,
+            isPullup: true
+        }),
+        neoPixel: {start: 112, length: 23, strip: strip},
+        func: function(){smallAction()}
+    });
+
+    const OCTAVE_BUTTON: any = new Button({
+        button: new five.Button({
+            pin: 5,
+            isPullup: true
+        }),
+        neoPixel: {start: 136, length: 23, strip: strip},
+        func: function(){smallAction()}
+    });
+
 
 
 
@@ -223,17 +196,6 @@ board.on("ready", () => {
 
 
     // Buttons init
-
-    // const SMALL_BUTTON_1 = new five.Button({
-    //             pin: 2,
-    //             isPullup: true
-    //         });
-
-    // SMALL_BUTTON_1.on("down", () => {
-    //     smallAction();
-    //     console.log("BUTTON 1 PRESSED");
-
-    // });
 
 
 
