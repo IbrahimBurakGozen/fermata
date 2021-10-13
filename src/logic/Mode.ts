@@ -11,7 +11,7 @@ class Mode {
 	public DORIAN = DORIAN;
 	public LYDIAN = LYDIAN;
 	public MIXOLYDIAN = MIXOLYDIAN;
-    public AEOLIAN = AEOLIAN;
+  public AEOLIAN = AEOLIAN;
 
 	public  DATABASE: Array<ModeDef> = [this.IONIAN, this.DORIAN, this.LYDIAN, this.MIXOLYDIAN, this.AEOLIAN];
 	public  index: number = 0;
