@@ -13,24 +13,8 @@ import note from './logic/Note';
 const five = require('johnny-five');
 const pixel = require('node-pixel');
 
-
-//Pinout init
-//Pinouts are bound to change
-
-const PIXEL_STICKS_PIN = 10
-
-
-const PIXEL_RING_SMALL_PIN = "AO";
-const PIXEL_RING_BIG_CHORDS_PIN = "A1";
-const PIXEL_RING_BIG_HARMONY_PIN = null;
-const PIXEL_RING_BIG_TRANSPOSE_PIN = null;
- 
-// NeoPixel sticks and rings
-let pixelSticks
-let smallRings;
-let bigRingsChords;
-let bigRingsHarmony;
-let bigRingsTranspose;
+import NeoPixel from './lib/neopixel';
+import Button from './lib/button';
 
 
 
@@ -63,7 +47,7 @@ board.on("ready", () => {
     note.lastRecorded = "C3"
     mode.init();
 
-    const SMALL_BUTTON_1 = new five.Button(2);
+    /*const SMALL_BUTTON_1 = new five.Button(2);
     const SMALL_BUTTON_2 = new five.Button(3);
     const SMALL_BUTTON_3 = new five.Button(4);
 
@@ -72,20 +56,86 @@ board.on("ready", () => {
     const CHORD_BUTTON = new five.Button(7);
 
     const HARMONY_BUTTON = new five.Button(8);
-    const TRANSPOSE_BUTTON = new five.Button(9);
-
+    const TRANSPOSE_BUTTON = new five.Button(9);*/
 
 
     let strip = new pixel.Strip({
         board: board,
         controller: "FIRMATA",
-        strips: [ {pin: "3", length: 16}, ],
+        strips: [ {pin: "3", length: 160}, ],
         gamma: 2.8,
     });
 
-    strip.on("ready", () => {
-        strip.color('#FFF');
+    strip.on("ready", async () => {
+
+        strip.color("#000");
+
         strip.show();
+
+        const CHORD_BUTTON: any = new Button({
+            button: {
+                pin: 2,
+                isPullup: true
+            },
+            neoPixel: new NeoPixel({start: 0, length: 23, strip: strip})
+        });
+
+        CHORD_BUTTON.solidColor("#0F0");
+
+        // const SMALL_1_BUTTON: any = new Button({
+        //     button: new five.Button({
+        //         pin: 2,
+        //         isPullup: true
+        //     }),
+        //     neoPixel: new NeoPixel({start: 24, length: 15, strip: strip})
+        // });
+
+        // SMALL_1_BUTTON.solidColor("cyan");
+
+        // SMALL_1_BUTTON.button.on("down", () => {
+        //     console.log("button pressed");
+        // });
+
+        // const SMALL_2_BUTTON: any = new Button({
+        //     button: new five.Button({
+        //         pin: 2,
+        //         isPullup: true
+        //     }),
+        //     neoPixel: new NeoPixel({start: 40, length: 15, strip: strip})
+        // });
+
+        // const SMALL_3_BUTTON: any = new Button({
+        //     button: new five.Button({
+        //         pin: 2,
+        //         isPullup: true
+        //     }),
+        //     neoPixel: new NeoPixel({start: 56, length: 15, strip: strip})
+        // });
+
+
+        // const TRANSPOSE_RING: any = new NeoPixel({start: 72, length: 23, strip: strip});
+        // TRANSPOSE_RING.color("#0F0");
+
+        // const HARMONY_RING: any = new NeoPixel({start: 96, length: 15, strip: strip});
+        // HARMONY_RING.color("#00F");
+
+        // const VAMP_RING: any = new NeoPixel({start: 112, length: 23, strip: strip});
+        // VAMP_RING.color("#0F0");
+
+        // const OCTAVE_RING: any = new NeoPixel({start: 136, length: 23, strip: strip});
+        // OCTAVE_RING.color("#00F");
+
+
+
+        // for(let i = 0; i <= 159; i++){
+        //     strip.pixel(i).color("#F00");
+        //     strip.show();
+        //     console.log(i);
+        //     await delay(1000);
+        //   }
+
+
+
     });
 
 
@@ -174,11 +224,22 @@ board.on("ready", () => {
 
     // Buttons init
 
-    SMALL_BUTTON_1.on("down", () => {
-        smallAction();
-        console.log("BUTTON 1 PRESSED");
+    // const SMALL_BUTTON_1 = new five.Button({
+    //             pin: 2,
+    //             isPullup: true
+    //         });
 
-    });
+    // SMALL_BUTTON_1.on("down", () => {
+    //     smallAction();
+    //     console.log("BUTTON 1 PRESSED");
+
+    // });
+
+
+
+
+
+
 
     // SMALL_BUTTON_2.on("down", () => {
     //     smallAction();
