@@ -11,7 +11,7 @@ import harmony from './actions/harmony.action';
 import note from './logic/Note';
 
 const five = require('johnny-five');
-const pixel = require('node-pixel')
+const pixel = require('node-pixel');
 
 
 //Pinout init
@@ -21,7 +21,7 @@ const PIXEL_STICKS_PIN = 10
 
 
 const PIXEL_RING_SMALL_PIN = "AO";
-const PIXEL_RING_BIG_CHORDS_PIN = null;
+const PIXEL_RING_BIG_CHORDS_PIN = "A1";
 const PIXEL_RING_BIG_HARMONY_PIN = null;
 const PIXEL_RING_BIG_TRANSPOSE_PIN = null;
  
@@ -55,6 +55,7 @@ let specialsAreUnlocked: boolean = false;
 
 // MAIN
 
+
 let board = new five.Board();
  
 board.on("ready", () => {
@@ -74,6 +75,22 @@ board.on("ready", () => {
     const TRANSPOSE_BUTTON = new five.Button(9);
 
 
+
+    let strip = new pixel.Strip({
+        board: board,
+        controller: "FIRMATA",
+        strips: [ {pin: "3", length: 16}, ],
+        gamma: 2.8,
+    });
+
+    strip.on("ready", () => {
+        strip.color('#FFF');
+        strip.show();
+    });
+
+
+
+
     //NeoPixel Stick init
     // pixelSticks = new pixel.Strip({
     //     board: this,
@@ -82,12 +99,12 @@ board.on("ready", () => {
     //     gamma: 2.8,
     // });
     
-    // // Small rings init
+    // Small rings init
     // smallRings = new pixel.Strip({
     //     board: this,
     //     controller: "FIRMATA",
-    //     strips: [ {pin: PIXEL_RING_BIG_CHORDS_PIN, length: 64}, ],
-    //     gamma: 2.8,
+    //     strips: [ {pin: PIXEL_RING_BIG_CHORDS_PIN, length: 16} ], // 64
+    //     gamma: 2.8
     // });
 
     // // Big rings init
@@ -111,7 +128,9 @@ board.on("ready", () => {
     // });
 
 
+
       //Score functions
+      
       function smallScore() {
 
         // When a basic button is pressed, add 1 to 3 points to the score towards unlocking chords (smallButtonScore)
@@ -155,39 +174,52 @@ board.on("ready", () => {
 
     // Buttons init
 
-    SMALL_BUTTON_1.on("down", smallAction());
-    SMALL_BUTTON_2.on("down", smallAction());
-    SMALL_BUTTON_3.on("down", smallAction());
+    SMALL_BUTTON_1.on("down", () => {
+        smallAction();
+        console.log("BUTTON 1 PRESSED");
 
-    OCTAVE_BUTTON.on("down", () => {
-        console.log("Octave notes");
-        octave.onPress();
-        smallScore();
-    })
+    });
+
+    // SMALL_BUTTON_2.on("down", () => {
+    //     smallAction();
+    // });
+
+    // SMALL_BUTTON_3.on("down", () => {
+    //     smallAction();
+    // });
+
+    // SMALL_BUTTON_2.on("down", smallAction());
+    // SMALL_BUTTON_3.on("down", smallAction());
+
+    // OCTAVE_BUTTON.on("down", () => {
+    //     console.log("Octave notes");
+    //     octave.onPress();
+    //     smallScore();
+    // })
     
-    VAMP_BUTTON.on("down", () => {
-        console.log("Vamp chord");
-        vamp.onPress();
-        chordScore();
-    })
+    // VAMP_BUTTON.on("down", () => {
+    //     console.log("Vamp chord");
+    //     vamp.onPress();
+    //     chordScore();
+    // })
 
-    CHORD_BUTTON.on("down", () => {
-        console.log("Vamp chord");
-        chord.onPress();
-        chordScore();
-    })
+    // CHORD_BUTTON.on("down", () => {
+    //     console.log("Vamp chord");
+    //     chord.onPress();
+    //     chordScore();
+    // })
 
-    HARMONY_BUTTON.on("down", () => {
-        console.log("Harmony action");
-        harmony.onPress();
-        specialScore();
-    })
+    // HARMONY_BUTTON.on("down", () => {
+    //     console.log("Harmony action");
+    //     harmony.onPress();
+    //     specialScore();
+    // })
 
-    TRANSPOSE_BUTTON.on("down", () => {
-        console.log("Transposed!");
-        transpose.onPress();
-        specialScore();
-    })
+    // TRANSPOSE_BUTTON.on("down", () => {
+    //     console.log("Transposed!");
+    //     transpose.onPress();
+    //     specialScore();
+    // })
 
 }); 
 
