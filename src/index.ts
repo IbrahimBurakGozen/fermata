@@ -59,6 +59,9 @@ let board = new five.Board();
  
 board.on("ready", () => {
 
+    note.lastRecorded = "C3"
+    mode.init();
+
     const SMALL_BUTTON_1 = new five.Button(2);
     const SMALL_BUTTON_2 = new five.Button(3);
     const SMALL_BUTTON_3 = new five.Button(4);
