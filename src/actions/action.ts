@@ -36,9 +36,7 @@ abstract class Action {
 
 		// DETERMINE CHORD TONES
 		let chordTones: any = mode.current.chords[Math.floor(Math.random() * mode.current.chords.length)];
-		console.log(`These are the chord tones: ${intervals.loadout.get(chordTones)}`)	
-
-		console.log(intervals.loadout.get(chordTones[0]));
+		//console.log(intervals.loadout.get(chordTones[0],));
 		new Sound(`/home/ubuntu/fermata/src/actions/sounds/${intervals.loadout.get(chordTones[0])}.wav`).play();	
 		new Sound(`/home/ubuntu/fermata/src/actions/sounds/${intervals.loadout.get(chordTones[1])}.wav`).play();
 		new Sound(`/home/ubuntu/fermata/src/actions/sounds/${intervals.loadout.get(chordTones[2])}.wav`).play();	
@@ -129,7 +127,6 @@ abstract class Action {
 			}
 			key.justChanged = false;
 		}
-		console.log("adjusted note => ", newNote);
 		return newNote;
 		}
 		
