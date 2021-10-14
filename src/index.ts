@@ -63,30 +63,30 @@ board.on("ready", () => {
     let strip = new pixel.Strip({
         board: board,
         controller: "FIRMATA",
-        strips: [ {pin: "3", length: 160}, ],
+        strips: [ {pin: "10", length: 160}, ],
         gamma: 2.8,
     });
 
     strip.on("ready", () => {
-        strip.color("#F00");
+        strip.color("#000");
         strip.show();
     });
 
 
     const CHORD_BUTTON: any = new Button({
         button: new five.Button({
-            pin: 2,
+            pin: 4,
             isPullup: true
         }),
         neoPixel: {start: 0, length: 23, strip: strip},
-        func: function(){smallAction()}
+        func: function(){chord.onPress()}
     });
 
-    CHORD_BUTTON.solidColor("cyan");
+    CHORD_BUTTON.solidColor("orange");
 
     const SMALL_1_BUTTON: any = new Button({
         button: new five.Button({
-            pin: 6,
+            pin: 5,
             isPullup: true
         }),
         neoPixel: {start: 24, length: 15, strip: strip},
@@ -104,32 +104,40 @@ board.on("ready", () => {
         func: function(){smallAction()}
     });
 
+    SMALL_2_BUTTON.solidColor("cyan");
+
     const SMALL_3_BUTTON: any = new Button({
         button: new five.Button({
-            pin: 6,
+            pin: 9,
             isPullup: true
         }),
         neoPixel: {start: 56, length: 15, strip: strip},
         func: function(){smallAction()}
     });
 
+    SMALL_3_BUTTON.solidColor("cyan");
+
     const TRANSPOSE_BUTTON: any = new Button({
         button: new five.Button({
-            pin: 6,
+            pin: 8,
             isPullup: true
         }),
         neoPixel: {start: 72, length: 23, strip: strip},
-        func: function(){smallAction()}
+        func: function(){transpose.onPress()}
     });
+
+    TRANSPOSE_BUTTON.solidColor("green");
 
     const HARMONY_BUTTON: any = new Button({
         button: new five.Button({
-            pin: 6,
+            pin: 7,
             isPullup: true
         }),
         neoPixel: {start: 96, length: 15, strip: strip},
-        func: function(){smallAction()}
+        func: function(){harmony.onPress()}
     });
+
+    HARMONY_BUTTON.solidColor("blue");
 
     const VAMP_BUTTON: any = new Button({
         button: new five.Button({
@@ -137,17 +145,21 @@ board.on("ready", () => {
             isPullup: true
         }),
         neoPixel: {start: 112, length: 23, strip: strip},
-        func: function(){smallAction()}
+        func: function(){vamp.onPress()}
     });
+
+    VAMP_BUTTON.solidColor("purple");
 
     const OCTAVE_BUTTON: any = new Button({
         button: new five.Button({
-            pin: 5,
+            pin: 3,
             isPullup: true
         }),
         neoPixel: {start: 136, length: 23, strip: strip},
-        func: function(){smallAction()}
+        func: function(){octave.onPress()}
     });
+
+    OCTAVE_BUTTON.solidColor("pink");
 
 
 
