@@ -4,6 +4,8 @@ import mode  from '../logic/Mode';
 import intervals from '../logic/Intervals';
 const Sound = require('node-aplay');
 
+const playAudioFile = require('audic');
+
 abstract class Action {
 
 	public playsNote: boolean = false;
@@ -24,8 +26,10 @@ abstract class Action {
 		let noteName = this.noteAdjustments(options);
 		console.log("This is the note that is going to be played => ", noteName);
 		
-		let sound = new Sound(`/home/ubuntu/fermata/src/actions/sounds/${noteName}.wav`);
-		await sound.play();
+		//let sound = new Sound(`/home/ubuntu/fermata/src/actions/sounds/${noteName}.wav`);
+		//await sound.play();
+
+		await new playAudioFile(`/home/ubuntu/fermata/src/actions/sounds/${noteName}.wav`);
 
 		note.secondToLastRecorded = note.lastRecorded;
 		note.lastRecorded = noteName;
