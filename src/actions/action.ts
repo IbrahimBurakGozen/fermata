@@ -60,7 +60,6 @@ abstract class Action {
 	/** Uses the option sets of the current mode to choose which note to generate. */
     protected generateNote(): void{
 
-        console.log('starting GenerateNote')
         let played: boolean = false;
 		
 		
@@ -82,7 +81,6 @@ abstract class Action {
 
 	//Edge cases and preventing chromatism hell
     protected noteAdjustments(options: Array<string>):string {
-			console.log('adjusting notes');
 			let newNote: any = "";
 			let random: number = 0;
 			

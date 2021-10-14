@@ -17,7 +17,7 @@ class NeoPixel {
   }
 
   solidColor(color: string){
-    console.log("changing color:", color);
+    // console.log("changing color:", color);
     this.#strip.on("ready", () => {
       for(let i = (this.#pixelData.start - 4); i <= (this.#pixelData.start + this.#pixelData.length); i++){
         if(i >= 0){
