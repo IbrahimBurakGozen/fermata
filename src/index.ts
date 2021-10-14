@@ -68,7 +68,7 @@ board.on("ready", () => {
     });
 
     strip.on("ready", () => {
-        strip.color("#000");
+        strip.color("rgb(150,0,0)");
         strip.show();
     });
 
@@ -82,7 +82,7 @@ board.on("ready", () => {
         func: function(){chord.onPress()}
     });
 
-    CHORD_BUTTON.solidColor("orange");
+    CHORD_BUTTON.solidColor("rgb(150,0,0)");
 
     const SMALL_1_BUTTON: any = new Button({
         button: new five.Button({
@@ -93,7 +93,7 @@ board.on("ready", () => {
         func: function(){smallAction()}
     });
 
-    SMALL_1_BUTTON.solidColor("cyan");
+    SMALL_1_BUTTON.solidColor("rgb(150,150,150)");
 
     const SMALL_2_BUTTON: any = new Button({
         button: new five.Button({
@@ -104,7 +104,7 @@ board.on("ready", () => {
         func: function(){smallAction()}
     });
 
-    SMALL_2_BUTTON.solidColor("cyan");
+    SMALL_2_BUTTON.solidColor("rgb(150,150,150)");
 
     const SMALL_3_BUTTON: any = new Button({
         button: new five.Button({
@@ -115,7 +115,7 @@ board.on("ready", () => {
         func: function(){smallAction()}
     });
 
-    SMALL_3_BUTTON.solidColor("cyan");
+    SMALL_3_BUTTON.solidColor("rgb(150,150,150)");
 
     const TRANSPOSE_BUTTON: any = new Button({
         button: new five.Button({
@@ -126,7 +126,7 @@ board.on("ready", () => {
         func: function(){transpose.onPress()}
     });
 
-    TRANSPOSE_BUTTON.solidColor("green");
+    TRANSPOSE_BUTTON.solidColor("rgb(0,150,0)");
 
     const HARMONY_BUTTON: any = new Button({
         button: new five.Button({
@@ -137,7 +137,7 @@ board.on("ready", () => {
         func: function(){harmony.onPress()}
     });
 
-    HARMONY_BUTTON.solidColor("blue");
+    HARMONY_BUTTON.solidColor("rgb(0,0,150)");
 
     const VAMP_BUTTON: any = new Button({
         button: new five.Button({
@@ -148,7 +148,7 @@ board.on("ready", () => {
         func: function(){vamp.onPress()}
     });
 
-    VAMP_BUTTON.solidColor("purple");
+    VAMP_BUTTON.solidColor("rgb(150,0,0)");
 
     const OCTAVE_BUTTON: any = new Button({
         button: new five.Button({
@@ -159,7 +159,7 @@ board.on("ready", () => {
         func: function(){octave.onPress()}
     });
 
-    OCTAVE_BUTTON.solidColor("pink");
+    OCTAVE_BUTTON.solidColor("rgb(150,0,0)");
 
 
 

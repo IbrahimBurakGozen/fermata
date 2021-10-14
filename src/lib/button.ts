@@ -1,9 +1,11 @@
 import NeoPixel from './neopixel';
+import {delay} from '../utils/delay';
 
 class Button{
   #neoPixel: any;
   button: any;
   func: any;
+  lastColor: any = "rgb(0, 0, 0)";
 
   /*
   {
@@ -29,6 +31,20 @@ class Button{
 
   solidColor(color: string){
     this.#neoPixel.solidColor(color);
+    this.lastColor = color;
+  }
+
+  async animateColor(type: string){
+	switch(type){
+		case "pressed":
+			let lastColor = this.lastColor;
+			this.solidColor("rgb(50,50,50)");
+			await delay(500);
+			this.solidColor(lastColor);
+		break;
+		default:
+		break;
+	}
   }
 
 }
