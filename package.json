@@ -14,7 +14,6 @@
   "license": "ISC",
   "dependencies": {
     "@types/jest": "^27.0.2",
-    "audic": "^2.0.0",
     "fs": "^0.0.1-security",
     "jest": "^27.2.4",
     "johnny-five": "^2.1.0",
