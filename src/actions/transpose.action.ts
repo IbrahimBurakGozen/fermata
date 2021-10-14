@@ -4,11 +4,10 @@ import mode  from "../logic/Mode";
 
 class Transpose extends Action{
     onPress(): void {
-        console.log('changing mode')
         mode.change();
-        console.log('changing key')
+        console.log('changing key in transpose');
+        
         Key.change();
-        console.log('playing transposition chord')
         this.playChord();
     }
 
