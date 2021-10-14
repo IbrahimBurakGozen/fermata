@@ -1,6 +1,6 @@
 import Action from "./action";
 import note from "../logic/Note";
-const Sound = require('aplay')
+const Sound = require('node-aplay')
 
 
 class Octave extends Action{
