@@ -89,11 +89,11 @@ abstract class Action {
 			newNote = intervals.loadout.get(options[random]);
 			
 			// Halve Probability of Trills and Repeats
-			if (newNote == note.secondToLastRecorded || newNote == note.lastAbsolute){
+			/* if (newNote == note.secondToLastRecorded || newNote == note.lastAbsolute){
 				console.log("halving probability of Trills and Repeats")
 				random = Math.random()* options.length;
 				newNote = intervals.loadout.get(options[random]);
-			}
+			} */
 			
 			let g = 0;		
 			while (g < 100 && (note == null
