@@ -21,9 +21,9 @@ class Octave extends Action{
 				while (octaveTone == "" || octaveTone == null) octaveTone = note.DATABASE[i + octaveDownorUp[Math.floor(Math.random() * octaveDownorUp.length)]];
 			}
         }
-	let playthis = new Sound(`/home/ubuntu/fermata/src/actions/sounds/${octaveTone}.wav`).play();
+	let playthis = new Sound(`/home/ubuntu/fermata/src/actions/sounds/${octaveTone}.wav`)
     await playthis.play();
-        note.lastOctave = octaveTone;
+    note.lastOctave = octaveTone;
     }   
 
     public toString(): string {
