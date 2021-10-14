@@ -1,7 +1,7 @@
 import Action from "./action";
 import Intervals from '../logic/Intervals';
 import Note from '../logic/Note';
-const Sound = require('node-aplay');
+const Sound = require('aplay');
 
 class Harmony extends Action{
 
