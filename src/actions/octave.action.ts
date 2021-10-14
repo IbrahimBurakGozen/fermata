@@ -10,7 +10,7 @@ class Octave extends Action{
         this.playOctave();
     }
 
-     public playOctave(){
+    public async playOctave(){
 
         let octaveTone:string = "";
         let octaveDownorUp: Array<number> = [-12, 12]
@@ -21,9 +21,8 @@ class Octave extends Action{
 				while (octaveTone == "" || octaveTone == null) octaveTone = note.DATABASE[i + octaveDownorUp[Math.floor(Math.random() * octaveDownorUp.length)]];
 			}
         }
-	new Sound(`/home/ubuntu/fermata/src/actions/sounds/${octaveTone}.wav`).play();
-    console.log("Playing octave note:", octaveTone);
-    
+	let playthis = new Sound(`/home/ubuntu/fermata/src/actions/sounds/${octaveTone}.wav`).play();
+    await playthis.play();
         note.lastOctave = octaveTone;
     }   
 

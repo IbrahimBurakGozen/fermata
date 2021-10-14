@@ -10,7 +10,7 @@ class Harmony extends Action{
         this.playHarmonyTone()
 	}
     
-    public playHarmonyTone() {
+    public async playHarmonyTone() {
 
 		let harmonyTone: any;
 		let choices: Array<any> = [];
@@ -41,8 +41,8 @@ class Harmony extends Action{
 
 		harmonyTone = Math.floor(Math.random() * choices.length);
 
-		new Sound(`/home/ubuntu/fermata/src/actions/sounds/${harmonyTone}.wav`).play();
-		
+		let note = new Sound(`/home/ubuntu/fermata/src/actions/sounds/${harmonyTone}.wav`).play();
+		await note.play();
 		Note.lastHarmony = harmonyTone;
 	}
 
