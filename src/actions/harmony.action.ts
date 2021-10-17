@@ -14,7 +14,8 @@ class Harmony extends Action{
 
 		let harmonyTone: any;
 		let choices: Array<any> = [];
-		var i/* :Map<String, String> */ = Intervals.loadout;
+		let harmonyIndex: number;
+		var i/* :Map<string, string> */ = Intervals.loadout;
 
 		switch (Note.lastAbsolute) {
 			case i.get("one1"):
@@ -85,7 +86,8 @@ class Harmony extends Action{
 				break;
 		}
 
-		harmonyTone = Math.floor(Math.random() * choices.length);
+		harmonyIndex = Math.floor(Math.random() * choices.length);
+		harmonyTone = i.get(choices[harmonyIndex]);
 		console.log("Harmony tone => ", harmonyTone);
 
 		let note = new Sound(`/home/ubuntu/fermata/src/actions/sounds/${harmonyTone}.wav`)
