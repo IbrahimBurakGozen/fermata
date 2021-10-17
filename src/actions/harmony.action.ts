@@ -87,7 +87,7 @@ class Harmony extends Action{
 		}
 
 		harmonyIndex = Math.floor(Math.random() * choices.length);
-		harmonyTone = i.get(choices[harmonyIndex]);
+		harmonyTone = choices[harmonyIndex];
 		console.log("Harmony tone => ", harmonyTone);
 
 		let note = new Sound(`/home/ubuntu/fermata/src/actions/sounds/${harmonyTone}.wav`)
